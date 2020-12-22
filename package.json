@@ -48,7 +48,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "git add"
+      "echo 'elint校验通过'"
     ]
   }
 }
