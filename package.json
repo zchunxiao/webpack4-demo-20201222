@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "demo": "echo '11jjjjj1'",
+    "demo": "echo 'commit代码'",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
@@ -41,7 +41,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run demo && lint-staged"
+      "pre-commit": "npm run demo && lint-staged",
+      "pre-push": "echo '向仓库提交代码'"
     }
   },
   "lint-staged": {
