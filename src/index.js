@@ -52,6 +52,8 @@ axios.interceptors.response.use((response)=>{
 //   })
 
 
+
+
 import qs from 'qs';
 const data = { 'bar': 123,"c":2,"d":3 };
 const d = "name=zang&age=12"
