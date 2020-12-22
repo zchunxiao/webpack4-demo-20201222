@@ -42,9 +42,6 @@ axios.interceptors.response.use((response)=>{
 })
 
 
-
-
-
 // axios.post('/api/esthesia/web/app/v5/pageIndex',{a:1,b:2})
 //   .then(function (response) {
 //     // handle success
