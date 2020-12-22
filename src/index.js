@@ -51,9 +51,6 @@ axios.interceptors.response.use((response)=>{
 //     console.log('请求成功的数据:',response);
 //   })
 
-
-
-
 import qs from 'qs';
 const data = { 'bar': 123,"c":2,"d":3 };
 const d = "name=zang&age=12"
