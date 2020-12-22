@@ -1,0 +1,13 @@
+/node_modules
+/.vscode
+
+
+
+# production
+/dist
+/.vscode
+
+# misc
+.DS_Store
+npm-debug.log*
+yarn-error.log
