@@ -4,6 +4,7 @@ import axios from 'axios'
 
 
 //任何位于 /src 的本地代码都可以关联到 process.env.NODE_ENV 环境变量
+// eslint-disable-next-line no-undef
 if (process.env.NODE_ENV !== 'production') {
      console.log('Looks like we are in development mode!');
  }
@@ -48,9 +49,10 @@ axios.interceptors.response.use((response)=>{
 //     console.log('请求成功的数据:',response);
 //   })
 
+
+
 import qs from 'qs';
 const data = { 'bar': 123,"c":2,"d":3 };
-const d = "name=zang&age=12"
 console.log('data:',data);
 console.log('data1:',qs.stringify(data),qs.parse())
 var config= {
