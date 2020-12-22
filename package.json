@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo 111",
+    "test": "echo '11jjjjj1'",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
@@ -19,7 +19,9 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
     "husky": "^4.3.6",
+    "lint-staged": "^10.5.3",
     "lodash": "^4.17.20",
+    "prettier": "^2.2.1",
     "style-loader": "^2.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.2.0",
