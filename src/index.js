@@ -1,32 +1,35 @@
-import { cube } from './math.js';
+/* eslint-disable no-loop-func */
+/* eslint-disable no-plusplus */
 import './styles.css';
 import axios from 'axios'
+//import qs from 'qs'
 
 
-//任何位于 /src 的本地代码都可以关联到 process.env.NODE_ENV 环境变量
-// eslint-disable-next-line no-undef
-if (process.env.NODE_ENV !== 'production') {
-     console.log('Looks like we are in development mode!');
- }
-
+var pageData = []
+// eslint-disable-next-line max-statements
 function component() {
-  var element = document.createElement('pre');
-  element.innerHTML = [
-          'Hello webpack!',
-          '5 cubed is equal to ' + cube(5)
-        ].join('\n\n');
+  // 外层盒子
+  var element = document.createElement('div');
+  element.classList.add('main');
+  element.id='main'
 
+  // eslint-disable-next-line no-plusplus
+  for (var i =0 ,len = 23; i < len; i++) {
+     var bodyElement = document.createElement('div');
+     bodyElement.id = `box${i+1}`;
+     bodyElement.classList.add('box');
+     bodyElement.classList.add(`box${i+1}`);
+     element.appendChild(bodyElement);
+  }
   return element;
 }
 
-console.log('axios.CancelToken:',axios.CancelToken.source());
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 
 // 请求拦截
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
-  console.log('开始发送请求',config);
   return Promise.resolve(config)
 }, function (error) {
   // Do something with request error
@@ -35,34 +38,100 @@ axios.interceptors.request.use(function (config) {
 
 
 // 响应拦截
-axios.interceptors.response.use((response)=>{
-  console.log('响应成功:',response)
-  return Promise.resolve(response)
-},err=>{
+axios.interceptors.response.use((response)=>Promise.resolve(response.data),err=>{
   console.log('err:',err)
 })
 
 
-// axios.post('/api/esthesia/web/app/v5/pageIndex',{a:1,b:2})
-//   .then(function (response) {
-//     // handle success
-//     console.log('请求成功的数据:',response);
-//   })
 
-import qs from 'qs';
-const data = { 'bar': 123,"c":2,"d":3 };
-console.log('data:',data);
-console.log('data1:',qs.stringify(data),qs.parse())
+
+// const data = {
+//   "__limit": 50,
+//   "__page": 1,
+//   "__sidx": "createTime", 
+//   "__order": "desc",
+//   "tableName":"", 
+//   "tableComment":"", 
+//   "startTime": "", 
+//   "endTime": ""
+// }
+
+
+// var config1= {
+//   url:'/api/esthesia/web/app/v5/pageIndex',
+//   method:'post',
+//   data,
+// }
+// axios(config1);
+
+
 var config= {
-  url:'/api/esthesia/web/app/v5/pageIndex',
+  url:'/dcs/sys/config/infos',
   method:'post',
-  // headers: { 'content-type': 'application/x-www-form-urlencoded' },
-  // data: qs.stringify(data),
-  data,
+  headers: {
+     'content-type': 'application/x-www-form-urlencoded',
+     'X-CSRF-Token': 'M2EyOGY4ZWU4ZjllZTUzNA==NmU4MDIxNmRlMTA0NDc0N2JiYmVlMTVkNTBkNDUxYWM=',
+     'X-Requested-With': 'XMLHttpRequest'
+    },
+   //data: qs.stringify(data)
 }
 
-axios(config);
+// eslint-disable-next-line consistent-return
+axios(config).then(res=>{
+  const { msg,data } = res;
+
+  // eslint-disable-next-line eqeqeq
+  if (msg != 'SUCCESS') {
+    return false
+  }
+
+  if (data.length > 0) {
+    pageData = data;
+    // eslint-disable-next-line no-use-before-define
+   // createMask(data,0)  
+  }
+});
+
+
+
+
+
+// 初始化渲染遮罩
+function createMask(maskData,showIndex) {
+  var list = maskData[showIndex];
+  var mask = document.createElement('div');
+  console.log('list.paramName',showIndex,list.paramName)
+  mask.classList.add('mask');
+  mask.id = 'mask';
+  mask.innerHTML = `<h1>1111<p>${list.paramName}</p></h1>`
+  document.body.appendChild(mask);
+}
+
+
 
 document.body.appendChild(component());
-  
+
+
+
+// 执行格式鼠标移入事件
+// eslint-disable-next-line no-empty
+var btn= document.getElementsByClassName('box'),
+   // eslint-disable-next-line block-scoped-var
+   l= btn.length;
+//eslint-disable-next-line block-scoped-var
+for (var j =0; j < l; j++) {
+  (
+    function(i) {
+      document.getElementById(`box${i+1}`).onmouseenter = function() {
+        createMask(pageData,i)  
+        document.getElementById("mask").className = `mask mask${i+1}`
+      }
+      document.getElementById(`box${i+1}`).onmouseleave = function() {
+        var box=document.getElementById("mask");
+        box.parentNode.removeChild(box);
+      }
+    }(j))
+}
+
+
 

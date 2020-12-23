@@ -11,6 +11,10 @@ module.exports = merge(common, {
             '/api': {
                 target: 'https://esthesia.yizhitongapp.com',
                 changeOrigin: true
+             },
+             '/dcs':{
+                target: 'http://192.168.33.74:8081',
+                changeOrigin: true
              }
         }
     }
