@@ -2,6 +2,7 @@
 /* eslint-disable no-plusplus */
 import './styles.css';
 import axios from 'axios'
+import "@babel/polyfill";
 //import qs from 'qs'
 
 
@@ -79,7 +80,6 @@ var config= {
 // eslint-disable-next-line consistent-return
 axios(config).then(res=>{
   const { msg,data } = res;
-
   // eslint-disable-next-line eqeqeq
   if (msg != 'SUCCESS') {
     return false
@@ -87,8 +87,6 @@ axios(config).then(res=>{
 
   if (data.length > 0) {
     pageData = data;
-    // eslint-disable-next-line no-use-before-define
-   // createMask(data,0)  
   }
 });
 
@@ -122,11 +120,12 @@ var btn= document.getElementsByClassName('box'),
 for (var j =0; j < l; j++) {
   (
     function(i) {
-      document.getElementById(`box${i+1}`).onmouseenter = function() {
+      document.getElementById(`box${i+1}`).onmouseenter = ()=>{
+        console.log('鼠标移入事件')
         createMask(pageData,i)  
         document.getElementById("mask").className = `mask mask${i+1}`
       }
-      document.getElementById(`box${i+1}`).onmouseleave = function() {
+      document.getElementById(`box${i+1}`).onmouseleave = ()=>{
         var box=document.getElementById("mask");
         box.parentNode.removeChild(box);
       }
