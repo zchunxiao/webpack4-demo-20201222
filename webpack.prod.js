@@ -11,7 +11,9 @@
       //   sourceMap: true
       // }),
       // 开启 BundleAnalyzerPlugin 
-      new BundleAnalyzerPlugin(), 
+      new BundleAnalyzerPlugin({
+        openAnalyzer:false //手动打开游览器
+      }), 
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       })
