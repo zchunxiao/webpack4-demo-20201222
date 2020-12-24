@@ -17,11 +17,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
           {
             test: /\.css$/,
             use: [ 'style-loader', 'css-loader']
+          },
+          {
+            test: /\.(png|jpeg|jpg)$/,
+            use: [ 'file-loader']
+          },
+          {
+            test: /\.js$/,    
+            exclude: /node_modules/,    
+            use: [ 'babel-loader']
           }
       ]
     },
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist')
+   },
+   resolve:{
+    alias:{
+      assets: path.resolve(__dirname,'src/assets/')
+    }
    }
  };
