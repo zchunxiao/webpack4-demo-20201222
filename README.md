@@ -9,3 +9,6 @@ npm install --save-dev @babel/polyfill
 ```
 
 ### promise 转码会增加很多代码用来实现promise对象。
+
+
+## 安装bable-cli依赖以实现 bable -V 查看babel版本
