@@ -1,9 +1,9 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-plusplus */
 import './styles.css';
 import axios from 'axios'
 import "@babel/polyfill";
-//import qs from 'qs'
 
 
 var pageData = []
@@ -38,72 +38,95 @@ axios.interceptors.request.use(function (config) {
 });
 
 
-// 响应拦截
-axios.interceptors.response.use((response)=>Promise.resolve(response.data),err=>{
-  console.log('err:',err)
-})
-
-
-
-
-// const data = {
-//   "__limit": 50,
-//   "__page": 1,
-//   "__sidx": "createTime", 
-//   "__order": "desc",
-//   "tableName":"", 
-//   "tableComment":"", 
-//   "startTime": "", 
-//   "endTime": ""
-// }
-
-
-// var config1= {
-//   url:'/api/esthesia/web/app/v5/pageIndex',
-//   method:'post',
-//   data,
-// }
-// axios(config1);
-
 
 var config= {
-  url:'/dcs/sys/config/infos',
-  method:'post',
+  url:'/dcs/api/device/getInfos',
+  method:'get',
   headers: {
-     'content-type': 'application/x-www-form-urlencoded',
-     'X-CSRF-Token': 'M2EyOGY4ZWU4ZjllZTUzNA==NmU4MDIxNmRlMTA0NDc0N2JiYmVlMTVkNTBkNDUxYWM=',
-     'X-Requested-With': 'XMLHttpRequest'
+     //'content-type': 'application/x-www-form-urlencoded',
+     //'X-CSRF-Token': 'M2EyOGY4ZWU4ZjllZTUzNA==NmU4MDIxNmRlMTA0NDc0N2JiYmVlMTVkNTBkNDUxYWM=',
+     //'X-Requested-With': 'XMLHttpRequest'
     },
    //data: qs.stringify(data)
 }
 
 // eslint-disable-next-line consistent-return
 axios(config).then(res=>{
-  const { msg,data } = res;
+  const { msg,devInfoVo } = res;
   // eslint-disable-next-line eqeqeq
   if (msg != 'SUCCESS') {
     return false
   }
 
-  if (data.length > 0) {
-    pageData = data;
+  if (devInfoVo.length > 0) {
+    pageData = devInfoVo;
   }
+
 });
 
 
+// 维护设备信息
+var m = new Map();
+m.set('0','振动给料机');
+m.set('1','皮带输送机1');
+m.set('2','皮带输送机2');
+m.set('3','二级振动筛');
+m.set('4','破碎机');
+m.set('5','一级振动筛');
+m.set('6','一级铅栅螺旋');
+m.set('7','二级铅栅螺旋');
+m.set('8','压滤机');
+m.set('9','刮板输送机');
+m.set('10','滤液输送泵');
+m.set('11','滤液罐');
+m.set('12','铅泥输送泵');
+m.set('13','铅泥罐搅拌机');
+m.set('14','铅泥罐');
+m.set('15','铅泥沉淀机液下泵1');
+m.set('16','铅泥沉淀机液下泵2');
+m.set('17','铅泥沉淀机');
+m.set('18','酸液循环泵'); 
+m.set('19','酸液循环稀泥泵');
+m.set('20','循环罐搅拌机');
+m.set('21','循环罐');
+m.set('22','循环水池液下泵');
+
+// 转换True False
+function format(value) {
+  if (value === 'True') {
+    return '是'
+  } else if (value === 'False') {
+    return '否'
+  } 
+  return value;
+  
+  
+}
 
 
 
 // 初始化渲染遮罩
-function createMask(maskData,showIndex) {
-  var list = maskData[showIndex];
+function createMask(list,title) {
   var mask = document.createElement('div');
-  console.log('list.paramName',showIndex,list.paramName)
+  const info = list.map((i)=>`<p>${i.name}:${format(i.value)}</p>`).join('');
   mask.classList.add('mask');
   mask.id = 'mask';
-  mask.innerHTML = `<h1>1111<p>${list.paramName}</p></h1>`
+  mask.innerHTML = `<div class='mask-content'><p class='title'>设备名称:${title}</p>${info}</div>`
   document.body.appendChild(mask);
 }
+
+
+// 根据设备名称获取设备信息
+function getInfo(data,name) {
+  var num = data.filter((item)=>item.name === name)
+  // eslint-disable-next-line max-statements-per-line
+  if (num.length === 0) {
+    return false;
+  }
+  return num[0].plcParamInfoVoList
+}
+
+
 
 
 
@@ -121,8 +144,8 @@ for (var j =0; j < l; j++) {
   (
     function(i) {
       document.getElementById(`box${i+1}`).onmouseenter = ()=>{
-        console.log('鼠标移入事件')
-        createMask(pageData,i)  
+        var tempList = getInfo(pageData,m.get(`${i}`)); 
+        createMask(tempList,m.get(`${i}`)) 
         document.getElementById("mask").className = `mask mask${i+1}`
       }
       document.getElementById(`box${i+1}`).onmouseleave = ()=>{

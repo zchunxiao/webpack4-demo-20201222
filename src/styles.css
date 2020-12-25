@@ -15,14 +15,14 @@ body{
 }
 .mask{
     width:400px;
-    height: 200px;
-    background:rgba(0,0,0,0.3);
     z-index:100;
     position: absolute;
-    left:0;
-    top: 0;
+    /* left:0;
+    top: 0; */
     pointer-events: none;
     color:#fff;
+    background:rgba(0,0,0,0.3);
+    border-radius: 10px;
 }
 
 .box{
@@ -111,8 +111,9 @@ body{
     top: 416px;
 }
 .mask8{
-    left: 1307px;
+    /* left: 1307px; */
     top: 416px;
+    right:0;
 }
 .box9{
     width: 180px;
@@ -142,7 +143,7 @@ body{
 }
 .mask11{
     left: 51px;
-    top: 696px; 
+    bottom:0;
 }
 .box12{
     width: 80px;
@@ -152,7 +153,8 @@ body{
 }
 .mask12{
     left: 152px;
-    top: 624px;
+    /* top: 624px; */
+    bottom:0;
 }
 .box13{
     width: 80px;
@@ -162,7 +164,8 @@ body{
 }
 .mask13{
     left: 305px;
-    top: 680px;
+    /* top: 680px; */
+    bottom:0;
 }
 .box14{
     width: 80px;
@@ -172,7 +175,8 @@ body{
 }
 .mask14{
     left: 434px;
-    top: 576px;
+    /* top: 576px; */
+    bottom:0;
 }
 .box15{
     width: 80px;
@@ -182,7 +186,8 @@ body{
 }
 .mask15{
     left: 434px;
-    top: 628px;
+    /* top: 628px; */
+    bottom:0;
 }
 .box16{
     width: 100px;
@@ -192,7 +197,8 @@ body{
 }
 .mask16{
     left: 793px;
-    top: 575px;
+    /* top: 575px; */
+    bottom:0;
 }
 .box17{
     width: 100px;
@@ -202,7 +208,8 @@ body{
 }
 .mask17{
     left: 911px;
-    top: 575px;
+    /* top: 575px; */
+    bottom:0;
 }
 .box18{
     width: 100px;
@@ -212,7 +219,8 @@ body{
 }
 .mask18{
     left: 840px;
-    top: 624px; 
+    /* top: 624px;  */
+    bottom:0;
 }
 .box19{
     width: 100px;
@@ -222,7 +230,8 @@ body{
 }
 .mask19{
     left: 1040px;
-    top: 676px; 
+    /* top: 676px;  */
+    bottom:0;
 }
 .box20{
     width: 100px;
@@ -232,7 +241,8 @@ body{
 }
 .mask20{
     left: 1174px;
-    top: 640px;
+    /* top: 640px; */
+    bottom:0;
 }
 .box21{
     width: 100px;
@@ -241,8 +251,10 @@ body{
     top: 620px;
 }
 .mask21{
-    left: 1275px;
-    top: 620px;
+    /* left: 1275px; */
+    /* top: 620px; */
+    bottom:0;
+    right:0;
 }
 .box22{
     width: 100px;
@@ -252,7 +264,8 @@ body{
 }
 .mask22{
     left: 1274px;
-    top: 679px;
+    /* top: 679px; */
+    bottom:0;
 }
 .box23{
     width: 100px;
@@ -261,6 +274,15 @@ body{
     top: 684px;
 }
 .mask23{
-    left: 1384px;
-    top: 684px;
+    /* left: 1384px; */
+    /* top: 684px; */
+    bottom:0;
+    right:0;
+}
+.title{
+    text-align: center;
+    font-size: 28px;
+}
+.mask-content{
+    padding:10px;
 }
