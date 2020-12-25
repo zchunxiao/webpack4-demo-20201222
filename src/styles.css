@@ -83,7 +83,8 @@ body{
 }
 .mask5{
     left: 703px;
-    top: 196px; 
+    /* top: 196px;  */
+    top: 0; 
 }
 .box6{
     width: 180px;
