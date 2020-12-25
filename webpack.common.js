@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
    plugins: [
      new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
-       title: 'Production'
+       title: '天能'
      })
    ],
    module:{

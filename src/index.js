@@ -52,12 +52,12 @@ var config= {
 
 // eslint-disable-next-line consistent-return
 axios(config).then(res=>{
-  const { msg,devInfoVo } = res;
+  const { data: { msg,devInfoVo } } = res;
   // eslint-disable-next-line eqeqeq
   if (msg != 'SUCCESS') {
     return false
   }
-
+  
   if (devInfoVo.length > 0) {
     pageData = devInfoVo;
   }
@@ -111,7 +111,7 @@ function createMask(list,title) {
   const info = list.map((i)=>`<p>${i.name}:${format(i.value)}</p>`).join('');
   mask.classList.add('mask');
   mask.id = 'mask';
-  mask.innerHTML = `<div class='mask-content'><p class='title'>设备名称:${title}</p>${info}</div>`
+  mask.innerHTML = `<div class='mask-content'><p class='title'>${title}</p>${info}</div>`
   document.body.appendChild(mask);
 }
 
@@ -150,10 +150,7 @@ for (var j =0; j < l; j++) {
       }
       document.getElementById(`box${i+1}`).onmouseleave = ()=>{
         var box=document.getElementById("mask");
-        if (box) {
-          box.parentNode.removeChild(box);
-        }
-      
+        box.parentNode.removeChild(box);
       }
     }(j))
 }
