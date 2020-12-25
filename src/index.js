@@ -150,7 +150,10 @@ for (var j =0; j < l; j++) {
       }
       document.getElementById(`box${i+1}`).onmouseleave = ()=>{
         var box=document.getElementById("mask");
-        box.parentNode.removeChild(box);
+        if (box) {
+          box.parentNode.removeChild(box);
+        }
+      
       }
     }(j))
 }
