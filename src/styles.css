@@ -9,7 +9,7 @@ body{
     width:1600px;
     height: 900px;
     margin:auto;
-    background:url('assets/bg.png');
+    background:url('assets/bg.png') no-repeat;
     position: relative;
     background-size: 100%;
 }
